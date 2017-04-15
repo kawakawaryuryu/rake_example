@@ -4,7 +4,7 @@ DIR = "./files"
 directory DIR
 
 desc "default task"
-task :default => ["hello", DIR, "hello.txt"]
+task :default => ["hello", DIR, "hello.txt", :filelist]
 
 desc "echo hello, world"
 task "hello" do
@@ -20,4 +20,10 @@ end
 desc "copy markdown file to text file"
 rule ".txt" => [".md", DIR] do |f|
   cp f.source, "#{DIR}/#{f.name}"
+end
+
+desc "display file list"
+task :filelist do
+  files = Rake::FileList["*"]
+  puts files
 end
