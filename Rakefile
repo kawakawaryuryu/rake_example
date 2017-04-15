@@ -1,5 +1,10 @@
+require 'rake'
+
+DIR = "./files"
+directory DIR
+
 desc "default task"
-task :default => ["hello", "hello.txt"]
+task :default => ["hello", DIR, "hello.txt"]
 
 desc "echo hello, world"
 task "hello" do
@@ -11,7 +16,8 @@ end
 #  sh "cp #{f.source} #{f.name}"
 #end
 
+
 desc "copy markdown file to text file"
-rule ".txt" => ".md" do |f|
-  sh "cp #{f.source} #{f.name}"
+rule ".txt" => [".md", DIR] do |f|
+  cp f.source, "#{DIR}/#{f.name}"
 end
