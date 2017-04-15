@@ -24,6 +24,6 @@ end
 
 desc "display file list"
 task :filelist do
-  files = Rake::FileList["*"]
+  files = Rake::FileList["*", ".*"]
   puts files
 end
