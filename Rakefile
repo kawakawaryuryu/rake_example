@@ -25,7 +25,6 @@ end
 desc "display file list"
 task :filelist do
   files = Rake::FileList["*", ".*"]
-  files.exclude(".")
-  files.exclude("..")
+  files.exclude(/^\.+$/)
   puts files
 end
