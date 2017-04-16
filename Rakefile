@@ -1,4 +1,5 @@
 require 'rake'
+require 'rake/clean'
 
 DIR = "./files"
 directory DIR
@@ -22,6 +23,10 @@ rule ".txt" => [".md", DIR] do |f|
   cp f.source, "#{DIR}/#{f.name}"
 end
 
+rule ".md" do |f|
+  touch "hello.md"
+end
+
 desc "display file list"
 task :filelist do
   FILES = Rake::FileList.new("*", ".*") do |fl|
@@ -30,3 +35,5 @@ task :filelist do
   puts FILES.pathmap("%X")
 end
 
+CLEAN.include("hello.md")
+CLOBBER.include("#{DIR}/hello.txt")
