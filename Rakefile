@@ -24,7 +24,9 @@ end
 
 desc "display file list"
 task :filelist do
-  files = Rake::FileList["*", ".*"]
-  files.exclude(/^\.+$/)
-  puts files
+  FILES = Rake::FileList.new("*", ".*") do |fl|
+    fl.exclude(/^\.+$/)
+  end
+  puts FILES.pathmap("%X")
 end
+
